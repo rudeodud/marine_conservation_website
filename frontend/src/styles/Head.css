@@ -1,0 +1,76 @@
+header {
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.Head-wrapper {
+    width: 80vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Head-logo {
+    width: 20vw;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.Head-menu {
+    width: 20vw;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.Head-menu-item {
+    width: 10vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.Head-auth {
+    width: 10vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Head-auth-login {
+    width: 5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: #ffffff;
+    height: 2vw;
+    border-radius: 1vw;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-size: 0.8vw;
+    border: 1px solid #000000;
+}
+
+.Head-auth-login:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.Head-auth-divider {
+    width: 1vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
