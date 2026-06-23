@@ -2,36 +2,57 @@ services:
   db:
     image: mysql:8.0
     container_name: marine-db
+    restart: always
+
     environment:
-      MYSQL_ROOT_PASSWORD: MYSQL_ROOT_PASSWORD
+      MYSQL_ROOT_PASSWORD: root1234
       MYSQL_DATABASE: marine_db
-      MYSQL_USER: DB_USER
-      MYSQL_PASSWORD: MYSQL_PASSWORD_PASSWORD
+      MYSQL_USER: marine_user
+      MYSQL_PASSWORD: marine_password
+
     ports:
       - "3306:3306"
+
     volumes:
-      - ./db_data:/var/lib/mysql
+      - db_data:/var/lib/mysql
 
   redis:
     image: redis:7
     container_name: marine-redis
+    restart: always
+
     ports:
       - "6379:6379"
+
     volumes:
-      - ./redis_data:/data
+      - redis_data:/data
 
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
+
     container_name: marine-backend
+
+    restart: always
+
     ports:
       - "5000:5000"
+
     environment:
-      DATABASE_URL: mysql://DB_USER:${MYSQL_PASSWORD}:${DB_HOST}:3306/marine_db
-      REDIS_URL: redis://marine-redis:6379
-      SECRET_KEY: "your-secret-key"  # 실제 운영 시에는 더 복잡한 키 사용
-      DEBUG: "true"
+      PORT: 5000
+
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: marine_user
+      DB_PASSWORD: marine_password
+      DB_NAME: marine_db
+
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+
+      JWT_SECRET: oceanguard-secret-key
+
     depends_on:
       - db
       - redis
@@ -40,21 +61,20 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+
     container_name: marine-frontend
+
+    restart: always
+
     ports:
       - "3000:3000"
+
     environment:
-      REACT_APP_API_URL: http://localhost:3000
+      REACT_APP_API_URL: http://localhost:5000
+
     depends_on:
       - backend
 
 volumes:
   db_data:
   redis_data:
-
-# 실행 방법
-# docker-compose up --build
-# 실행 끄기: docker-compose down
-#docker 전체 끄기: docker-compose down -v
-#이미지 끄기: docker image prune -a
-#이미지 삭제: docker image rm [이미지 이름]

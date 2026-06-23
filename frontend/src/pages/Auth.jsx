@@ -13,7 +13,6 @@ const Auth = () => {
             <Head />
 
             <div className="auth-container">
-
                 <div className="auth-tabs">
                     <button
                         className={isLogin ? "active" : ""}
@@ -31,7 +30,6 @@ const Auth = () => {
                 </div>
 
                 {isLogin ? <Login /> : <SignUp />}
-
             </div>
         </>
     );
