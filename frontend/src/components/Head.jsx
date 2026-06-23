@@ -70,7 +70,7 @@ const Head = () => {
                                     fontWeight: "600",
                                 }}
                             >
-                                {user.name}님
+                                {user.name} 님
                             </span>
 
                             <div
