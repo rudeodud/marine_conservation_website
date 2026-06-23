@@ -1,0 +1,124 @@
+.boost-container {
+    min-height: 100vh;
+    background-color: #f5f7fa;
+}
+
+.boost-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 110px 20px 40px;
+}
+
+.boost-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.boost-header h1 {
+    margin: 0;
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.boost-header p {
+    margin-top: 10px;
+    color: #666;
+}
+
+.boost-btn {
+    padding: 14px 24px;
+    border: none;
+    border-radius: 10px;
+    background-color: #0ea5e9;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.boost-btn:hover {
+    background-color: #0284c7;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.stat-card p {
+    margin: 0;
+    color: #666;
+    font-size: 15px;
+}
+
+.stat-card h2 {
+    margin-top: 15px;
+    margin-bottom: 0;
+    font-size: 32px;
+    color: #111827;
+}
+
+.boost-table-container {
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.boost-table-container h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.boost-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.boost-table th {
+    text-align: left;
+    background-color: #f9fafb;
+    padding: 15px;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.boost-table td {
+    padding: 15px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.boost-table tr:hover {
+    background-color: #f8fafc;
+}
+
+@media (max-width: 768px) {
+    .boost-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .boost-content {
+        padding-top: 100px;
+    }
+
+    .boost-table {
+        font-size: 14px;
+    }
+}

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/Hero.css';
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+    const navigate = useNavigate();
 
     // 실제 사용할 이미지 목록
     const originalImages = [
@@ -132,7 +134,7 @@ const Hero = () => {
                 <div className="hero-actions">
 
                     {/* 후원 버튼 */}
-                    <button className="primary-button">
+                    <button className="primary-button" onClick={() => navigate("/Boost")}>
                         후원하기
                     </button>
 

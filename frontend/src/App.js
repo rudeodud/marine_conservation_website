@@ -4,6 +4,8 @@ import Activity from "./pages/activity";
 import News from "./pages/news";
 import Support from "./pages/support";
 import Auth from "./pages/Auth";
+import Boost from "./pages/Boost";
+
 function App() {
   return (
     <>
@@ -14,6 +16,7 @@ function App() {
           <Route path="/news" element={<News />} />
           <Route path="/support" element={<Support />} />
           <Route path="/auth" element={<Auth />} />
+          <Route path="/boost" element={<Boost />} />
         </Routes>
       </BrowserRouter>
     </>
