@@ -1,329 +1,316 @@
 /* ==========================================
-   🚨 강력한 외부 CSS 간섭 차단 및 초기화 방어벽
+   🚨 최상위 페이지 래퍼 및 전체 공간 홀더
    ========================================== */
-
-/* 1. Hero.css의 .hero-overlay가 침범하여 화면을 검게 물들이는 현상 원천 차단 🙅‍♂️ */
-.activity-container .hero-overlay {
-    position: relative !important;
-    inset: auto !important;
-    background: none !important;
-    width: 100% !important;
-    max-width: 800px !important;
-    margin: 0 auto !important;
-    padding: 20px !important;
-    z-index: 10 !important;
-}
-
-/* 2. Head.css의 vw 왜곡으로 인해 우측 레이아웃이 찢어지는 현상 차단 */
-.activity-container {
-    padding-top: 10vh;
-    /* 헤더 높이만큼 안착 */
+.activity-page-wrapper {
     width: 100vw !important;
     max-width: 100% !important;
     overflow-x: hidden !important;
-    /* 강제 스크롤 유발 방지 */
-    position: relative;
-    z-index: 1;
-    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
-    color: #2d3748;
-    background-color: #f4f7f6;
-    line-height: 1.7;
+    background-color: #ffffff;
+    padding-top: 80px;
+    /* 상단 헤더 메뉴바와 겹치지 않도록 이격 */
 }
 
-/* 모든 내부 자식들이 부모 크기를 넘지 못하게 박스 모델 고정 */
-.activity-container *,
-.activity-section * {
-    box-sizing: border-box;
-    max-width: 100%;
-}
-
-/* 외부 유출 가상 요소 레이어 디스플레이 해제 */
-.activity-container::before,
-.activity-container::after,
-.hero-image::before,
-.hero-image::after {
-    display: none !important;
-    content: none !important;
-}
-
-/* ==========================================
-   정의 공간: 테마 변수 (글로벌 변수 오염 회피)
-   ========================================== */
-.activity-container {
-    --primary-color: #0a2540;
-    /* 깊은 바다색 */
-    --secondary-color: #639fab;
-    /* 맑은 바다색 */
-    --accent-color: #ff6b6b;
-    /* 경고/포인트 테라코타 */
-    --card-bg: #ffffff;
-    --text-main: #2d3748;
-    --text-muted: #718096;
-    --border-radius-lg: 16px;
-    --border-radius-sm: 8px;
-    --transition-smooth: all 0.3s ease;
-}
-
-/* ==========================================
-   SECTION 1. HERO 비주얼 영역
-   ========================================== */
-.hero-image {
+/* 🖼️ 부활한 고감도 히어로 비주얼 영역 */
+.activity-hero {
     width: 100% !important;
-    height: 50vh;
-    min-height: 360px;
+    height: 35vh;
+    min-height: 280px;
+    background-image: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.75)),
+        url('https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-position: center;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     color: #ffffff;
-    position: relative;
-    margin: 0 !important;
-
-    /* 단일 통합 백그라운드로 안전하게 지정 */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80') !important;
-    background-position: center !important;
-    background-size: cover !important;
-    background-repeat: no-repeat !important;
+    margin-bottom: 60px;
 }
 
-.hero-overlay h1 {
-    font-size: 3rem;
+.activity-hero-inner h1 {
+    font-size: 2.8rem;
     font-weight: 800;
-    margin-bottom: 20px;
-    letter-spacing: -0.5px;
-    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    margin-bottom: 12px;
+    letter-spacing: -1px;
 }
 
-.hero-overlay p {
-    font-size: 1.25rem;
+.activity-hero-inner p {
+    font-size: 1.1rem;
     font-weight: 300;
-    opacity: 0.95;
+    opacity: 0.85;
     word-break: keep-all;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 /* ==========================================
-   SECTION 2. 공통 컨텐츠 기본 본문 레이아웃
+   🎯 핵심: 양옆 여유 공간을 엄격하게 확보한 메인 컨테이너
+   ========================================== */
+.activity-content-container {
+    max-width: 1280px !important;
+    /* 헤더 슬롯라인 폭에 칼같이 일치시킴 */
+    margin: 0 auto !important;
+    /* 화면 정중앙 유지 */
+    padding: 0 60px !important;
+    /* 텍스트가 양끝에 닿아 짜치지 않도록 정성껏 여백 수여 🌟 */
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    color: #1e293b;
+    line-height: 1.8;
+}
+
+.activity-content-container *,
+.activity-section * {
+    box-sizing: border-box;
+}
+
+/* ==========================================
+   SECTION HEADER (타이틀 아키이브 라인)
    ========================================== */
 .activity-section {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 80px 24px;
-    position: relative;
-    z-index: 5;
+    margin-bottom: 120px;
+    width: 100%;
+}
+
+.section-header {
+    border-bottom: 2px solid #111111;
+    /* 시크한 블랙 고대비 직선 선재 */
+    padding-bottom: 20px;
+    margin-bottom: 45px;
 }
 
 .activity-section h2 {
-    font-size: 2rem;
-    color: var(--primary-color);
-    margin-bottom: 24px;
-    font-weight: 700;
+    font-size: 1.85rem;
+    color: #111111;
+    font-weight: 800;
+    margin: 0 0 12px 0;
+    letter-spacing: -0.5px;
 }
 
-.activity-section>p {
-    font-size: 1.1rem;
-    color: var(--text-muted);
-    margin-bottom: 40px;
-    max-width: 850px;
+.section-meta {
+    font-size: 0.95rem;
+    color: #64748b;
+    font-weight: 400;
+    margin: 0;
+}
+
+/* ==========================================
+   📐 스플릿 그리드 & 내용 매칭 고화질 미디어 맵
+   ========================================== */
+.split-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+}
+
+.split-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 60px;
+    /* 이미지와 우측 아티클 텍스트 사이의 완벽한 밸런스 여백 */
+    width: 100%;
+}
+
+/* 무분별한 border-radius 철저히 배제 (0 고정) 📐 */
+.split-item::before {
+    content: '';
+    display: block;
+    flex: 0 0 46%;
+    height: 300px;
+    border-radius: 0 !important;
+    /* 미니멀 시크의 핵심인 직각 마감 */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* 💡 각 연구 주제 내용과 완벽히 호응하는 1:1 고감도 이미지 리소스 매핑 */
+
+/* 1.1 에너지 흐름/탄소흡수원 -> 심해로 가라앉는 탄소와 해조류 군락 🌿 */
+.research-1-1::before {
+    background-image: url('https://images.unsplash.com/photo-1546026423-cc4642628d2b?auto=format&fit=crop&w=800&q=80');
+}
+
+/* 1.2 경제적 발전/문화적 상호작용 -> 생태 관광과 바다거북 및 산호초 군락 🐢 */
+.research-1-2::before {
+    background-image: url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80');
+}
+
+/* 2.1 인류세의 위기와 갈림길 -> 거친 해류와 남획을 연상시키는 매트한 심해 비주얼 ⚓ */
+.research-2-1::before {
+    background-image: url('https://images.unsplash.com/photo-1518156677180-95a2893f3e9f?auto=format&fit=crop&w=800&q=80');
+}
+
+/* 2.2 지속 가능한 미래 수호 -> 정돈되어 안전하게 관리받는 아름다운 해안선 🏝️ */
+.research-2-2::before {
+    background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80');
+}
+
+/* 4.1 분류학적 vs 기능적 다양성 -> 생태적 역할을 지탱하는 해저 모래 및 저서 생태 🐚 */
+.research-3-1::before {
+    background-image: url('https://images.unsplash.com/photo-1682687220063-4742bd7fd538?auto=format&fit=crop&w=800&q=80');
+}
+
+/* 4.2 기능적 중복성 상실 -> 인간 활동(CHI)으로 직격탄을 맞은 극지방 빙하 바다 위기 🧊 */
+.research-3-2::before {
+    background-image: url('https://images.unsplash.com/photo-1520315342629-6ea920342047?auto=format&fit=crop&w=800&q=80');
+}
+
+/* 5.1 미세플라스틱 독성 유입 -> 실제 해수면에 무분별하게 떠다니는 플라스틱 쓰레기 실태 🚨 */
+.research-4-1::before {
+    background-image: url('https://images.unsplash.com/photo-1618477388954-7852f32655ec?auto=format&fit=crop&w=800&q=80');
+}
+
+/* 5.2 생물 농축과 인간으로의 역습 -> 먹이그물의 기저를 이루는 소형 어류 떼 군집 🐟 */
+.research-4-2::before {
+    background-image: url('https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?auto=format&fit=crop&w=800&q=80');
+}
+
+.split-text {
+    flex: 1;
+}
+
+.sub-num {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #0077b6;
+    display: inline-block;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+.split-text h3 {
+    font-size: 1.35rem;
+    color: #111111;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+    letter-spacing: -0.3px;
+}
+
+.split-text p {
+    font-size: 1rem;
+    color: #475569;
+    text-align: justify;
+    margin: 0;
     word-break: keep-all;
 }
 
 /* ==========================================
-   SECTION 3. 이로운 이유 (그리드 카드 디자인)
+   📊 DATA CHART VISUALIZATION (통계 매트 플랫 박스)
    ========================================== */
-.card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 24px;
-    margin-bottom: 40px;
-    width: 100%;
-}
-
-.info-card {
-    background: var(--card-bg);
-    padding: 32px;
-    border-radius: var(--border-radius-lg);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
-    transition: var(--transition-smooth);
-    border: 1px solid rgba(0, 0, 0, 0.01);
-}
-
-.info-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(10, 37, 64, 0.08);
-}
-
-.info-card h3 {
-    font-size: 1.3rem;
-    color: var(--primary-color);
-    margin-bottom: 16px;
-    font-weight: 600;
-}
-
-.info-card p {
-    font-size: 0.95rem;
-    color: var(--text-muted);
-    white-space: pre-line;
-}
-
-/* 내포 사례 안내형 박스 */
-.example-box {
-    background-color: rgba(99, 159, 171, 0.1);
-    border-left: 4px solid var(--secondary-color);
-    padding: 24px;
-    border-radius: 0 var(--border-radius-lg) var(--border-radius-lg) 0;
-    color: var(--primary-color);
-    margin-top: 30px;
-    width: 100%;
-}
-
-.example-box p {
-    margin-top: 8px;
-    font-size: 0.95rem;
-    color: var(--text-main);
-}
-
-/* ==========================================
-   SECTION 4. 아픈 이유 (위험 경고 대형 바 카드)
-   ========================================== */
-.danger-box {
-    background: var(--card-bg);
-    padding: 30px;
-    border-radius: var(--border-radius-lg);
-    margin-bottom: 20px;
-    border-left: 4px solid var(--accent-color);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.02);
-    width: 100%;
-}
-
-.danger-box h3 {
-    font-size: 1.25rem;
-    color: #c53030;
-    margin-bottom: 12px;
-}
-
-.danger-box p {
-    color: var(--text-main);
-    font-size: 1rem;
-}
-
-/* ==========================================
-   SECTION 5. 인류에게 생기는 문제 (세련된 호버 리스트)
-   ========================================== */
-.list {
-    list-style: none;
-    padding: 0;
-    width: 100%;
-}
-
-.list li {
-    background: var(--card-bg);
-    padding: 18px 24px;
-    border-radius: var(--border-radius-sm);
-    margin-bottom: 12px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.01);
+.data-display-container {
     display: flex;
     align-items: center;
-    font-size: 1.05rem;
-    transition: var(--transition-smooth);
+    gap: 60px;
+    background: #f8fafc;
+    padding: 50px;
+    border-radius: 0 !important;
+    border: 1px solid #e2e8f0;
 }
 
-.list li:hover {
-    transform: translateX(6px);
-    background-color: #ffffff;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.04);
+.data-chart-fallback {
+    flex: 0 0 45%;
+    height: 200px;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    border-bottom: 2px solid #111111;
+    padding-bottom: 6px;
 }
 
-/* ==========================================
-   SECTION 6. 인류의 해결 방안 (탑 보더 그리드)
-   ========================================== */
-.solution-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
+.bar-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 18%;
+    height: 100%;
+    justify-content: flex-end;
+}
+
+.bar {
     width: 100%;
+    border-radius: 0 !important;
 }
 
-.solution-grid>div {
-    background: #ffffff;
-    padding: 24px;
-    border-radius: var(--border-radius-lg);
-    font-weight: 600;
-    color: var(--primary-color);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+.bar.b1 {
+    background: #cbd5e1;
+}
+
+.bar.b2 {
+    background: #94a3b8;
+}
+
+.bar.b3 {
+    background: #475569;
+}
+
+.bar.b4 {
+    background: #111111;
+}
+
+.bar-wrapper span {
+    font-size: 0.78rem;
     text-align: center;
-    border-top: 3px solid var(--secondary-color);
+    margin-top: 10px;
+    color: #1e293b;
+    font-weight: 500;
 }
 
-.solution-grid>div p {
-    margin-top: 12px;
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    font-weight: 400;
+.data-text-box {
+    flex: 1;
+    font-size: 1rem;
+    color: #475569;
 }
 
 /* ==========================================
-   SECTION 7. 결론 영역 (풀 와이드 글래스 오버 디자인)
+   SIGNATURE MINIMAL FOOTER
    ========================================== */
-.activity-section.ocean {
-    background: linear-gradient(135deg, #0a2540 0%, #1a365d 100%) !important;
-    color: #ffffff;
-    max-width: 100% !important;
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    margin-right: calc(-50vw + 50%);
-    padding: 100px 24px;
+.ocean-footer {
+    border-top: 1px solid #111111;
+    padding-top: 60px;
+    margin-top: 100px;
     text-align: center;
 }
 
-.activity-section.ocean h2 {
-    color: #ffffff;
-    font-size: 2.2rem;
-}
-
-.activity-section.ocean p {
-    color: #e2e8f0;
-    margin: 0 auto 40px auto;
-    font-size: 1.15rem;
+.footer-quote {
+    font-size: 1.2rem;
+    color: #334155;
     max-width: 800px;
+    margin: 0 auto 30px auto;
+    word-break: keep-all;
 }
 
-.activity-section.ocean h3 {
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: #9ae6b4;
-    /* 파스텔 그린 에메랄드 */
-    background: rgba(255, 255, 255, 0.08);
-    display: inline-block;
-    padding: 16px 32px;
-    border-radius: 50px;
-    backdrop-filter: blur(8px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+.footer-title {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #111111;
+    margin: 0;
 }
 
 /* ==========================================
-   MEDIA QUERY. 반응형 스마트폰 최적화
+   RESPONSIVE MOBILE BREAKPOINTS
    ========================================== */
-@media (max-width: 768px) {
-    .hero-overlay h1 {
-        font-size: 2.2rem;
+@media (max-width: 960px) {
+    .activity-content-container {
+        padding: 0 24px !important;
     }
 
-    .hero-overlay p {
-        font-size: 1rem;
+    .split-item {
+        flex-direction: column;
+        gap: 24px;
     }
 
-    .activity-section {
-        padding: 50px 20px;
+    .split-item::before {
+        flex: 0 0 100%;
+        width: 100%;
+        height: 220px;
     }
 
-    .activity-section h2 {
-        font-size: 1.6rem;
+    .data-display-container {
+        flex-direction: column;
+        padding: 30px 20px;
+        gap: 40px;
     }
 
-    .activity-section.ocean h3 {
-        font-size: 1.1rem;
-        padding: 12px 20px;
+    .data-chart-fallback {
+        flex: 0 0 100%;
+        width: 100%;
     }
 }

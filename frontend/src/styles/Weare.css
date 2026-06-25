@@ -1,72 +1,158 @@
+/* ==========================================
+   🏛️ WE ARE (소개 섹션 미니멀 룩 전환)
+   ========================================== */
 .weare {
-    padding: 80px 20px;
-    background: #f5fbff;
+    padding: 120px 0;
+    /* 상하 숨통 트이는 정성스러운 이격 */
+    background: #ffffff;
+    /* 짜치는 파란 배경 대신 깨끗하고 시크한 화이트 */
 }
 
+/* 활동 페이지 컨테이너 그리드와 좌우 폭 칼같이 일치 🌟 */
 .weare-container {
-    max-width: 1200px;
-    margin: 0 auto;
+    max-width: 1280px !important;
+    margin: 0 auto !important;
+    padding: 0 60px !important;
+    /* 양옆 여유 공간 엄격 고정 */
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    letter-spacing: -0.4px;
 }
 
+.weare-container *,
+.weare * {
+    box-sizing: border-box;
+}
+
+/* ==========================================
+   HEADER ZONE
+   ========================================== */
 .weare-header {
-    text-align: center;
-    margin-bottom: 50px;
+    border-bottom: 2px solid #111111;
+    /* 묵직한 직선 가이드라인 */
+    padding-bottom: 30px;
+    margin-bottom: 60px;
 }
 
 .weare-header h2 {
-    font-size: 2.5rem;
-    margin-bottom: 15px;
-    color: #003b5c;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #111111;
+    margin: 0 0 16px 0;
+    letter-spacing: -0.8px;
 }
 
 .weare-header p {
-    font-size: 1.1rem;
-    color: #555;
+    font-size: 1.15rem;
+    color: #475569;
+    margin: 0;
+    line-height: 1.6;
 }
 
+/* ==========================================
+   📐 CARD 구조 탈피 -> 3단 수평 플랫 그리드
+   ========================================== */
 .weare-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
+    gap: 40px;
+    /* 아이템 사이 여유로운 간격 */
+    margin-bottom: 100px;
 }
 
-.weare-card {
-    background: white;
-    padding: 30px;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    transition: 0.3s;
+/* 🚨 무분별한 border-radius, box-shadow, 배경색 완벽 제거 (0) */
+.weare-item {
+    background: transparent !important;
+    padding: 20px 0 !important;
+    /* 상하 패딩만 주어 선 위아래 균형 배분 */
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    border-top: 1px solid #e2e8f0;
+    /* 상단 미세 실선으로 고급스러움 연출 */
+    transform: none !important;
+    /* 짜치는 마우스 붕 뜸 현상 제거 */
 }
 
-.weare-card:hover {
-    transform: translateY(-5px);
-}
-
-.weare-card h3 {
-    margin-bottom: 15px;
+.weare-num {
+    font-size: 0.85rem;
+    font-weight: 700;
     color: #0077b6;
+    display: block;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
 }
 
-.weare-card p {
-    line-height: 1.7;
-    color: #555;
+.weare-item h3 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #111111;
+    margin: 0 0 14px 0;
 }
 
+.weare-item p {
+    font-size: 0.98rem;
+    line-height: 1.75;
+    color: #475569;
+    margin: 0;
+    text-align: justify;
+    word-break: keep-all;
+}
+
+/* ==========================================
+   BOTTOM OBJECTIVE (우리의 목표 하단 플랫 밴드)
+   ========================================== */
 .weare-bottom {
     margin-top: 60px;
     text-align: center;
-    background: white;
-    padding: 40px;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    background: #f8fafc;
+    /* 은은하고 매트한 밝은 그레이 플랫 톤 */
+    padding: 60px 40px;
+    border-radius: 0 !important;
+    /* 모서리 칼각 직각화 */
+    box-shadow: none !important;
+    /* 그림자 완전 탈락 */
+    border-left: 4px solid #111111;
+    /* 활동 페이지와 일치감을 주는 왼편 마스터 라인 포인트 */
 }
 
 .weare-bottom h3 {
-    margin-bottom: 15px;
-    color: #0077b6;
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #111111;
+    margin: 0 0 16px 0;
 }
 
 .weare-bottom p {
+    font-size: 1.05rem;
     line-height: 1.8;
-    color: #555;
+    color: #334155;
+    max-width: 800px;
+    margin: 0 auto;
+    word-break: keep-all;
+}
+
+/* ==========================================
+   RESPONSIVE BREAKPOINT
+   ========================================== */
+@media (max-width: 960px) {
+    .weare {
+        padding: 80px 0;
+    }
+
+    .weare-container {
+        padding: 0 24px !important;
+    }
+
+    /* 모바일에서도 안전 여백 수호 */
+    .weare-header h2 {
+        font-size: 1.8rem;
+    }
+
+    .weare-grid {
+        gap: 20px;
+        margin-bottom: 60px;
+    }
+
+    .weare-bottom {
+        padding: 40px 20px;
+    }
 }
