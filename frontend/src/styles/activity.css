@@ -1,16 +1,27 @@
 /* ==========================================
-   🚨 헤더 레이아웃 유출 방어 및 강제 초기화 코드
+   🚨 강력한 외부 CSS 간섭 차단 및 초기화 방어벽
    ========================================== */
+
+/* 1. Hero.css의 .hero-overlay가 침범하여 화면을 검게 물들이는 현상 원천 차단 🙅‍♂️ */
+.activity-container .hero-overlay {
+    position: relative !important;
+    inset: auto !important;
+    background: none !important;
+    width: 100% !important;
+    max-width: 800px !important;
+    margin: 0 auto !important;
+    padding: 20px !important;
+    z-index: 10 !important;
+}
+
+/* 2. Head.css의 vw 왜곡으로 인해 우측 레이아웃이 찢어지는 현상 차단 */
 .activity-container {
-
-    /* 상단 고정 헤더(10vh)에 가려지지 않도록 패딩 추가 */
     padding-top: 10vh;
-
-    /* 헤더가 오른쪽으로 화면을 찢고 나가는 현상을 차단 🌟 */
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
-
+    /* 헤더 높이만큼 안착 */
+    width: 100vw !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    /* 강제 스크롤 유발 방지 */
     position: relative;
     z-index: 1;
     font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
@@ -19,26 +30,24 @@
     line-height: 1.7;
 }
 
-/* 외부 컴포넌트나 글로벌 스타일에서 흘러 들어온 가상 요소(음영의 주범) 완전히 제거 */
-.activity-container::before,
-.activity-container::after,
-.activity-section::before,
-.activity-section::after,
-.hero-image::before,
-.hero-image::after {
-    display: none !important;
-    content: none !important;
-}
-
-/* 모든 내부 요소가 부모 박스 크기를 벗어나지 않도록 강제 제한 */
+/* 모든 내부 자식들이 부모 크기를 넘지 못하게 박스 모델 고정 */
 .activity-container *,
 .activity-section * {
     box-sizing: border-box;
     max-width: 100%;
 }
 
+/* 외부 유출 가상 요소 레이어 디스플레이 해제 */
+.activity-container::before,
+.activity-container::after,
+.hero-image::before,
+.hero-image::after {
+    display: none !important;
+    content: none !important;
+}
+
 /* ==========================================
-   1. 디자인 시스템 변수 정의 (컨테이너 내 적용)
+   정의 공간: 테마 변수 (글로벌 변수 오염 회피)
    ========================================== */
 .activity-container {
     --primary-color: #0a2540;
@@ -46,48 +55,36 @@
     --secondary-color: #639fab;
     /* 맑은 바다색 */
     --accent-color: #ff6b6b;
-    /* 경고/포인트 색상 */
+    /* 경고/포인트 테라코타 */
     --card-bg: #ffffff;
-    /* 카드 배경색 */
     --text-main: #2d3748;
-    /* 메인 텍스트 */
     --text-muted: #718096;
-    /* 보조 텍스트 */
     --border-radius-lg: 16px;
     --border-radius-sm: 8px;
     --transition-smooth: all 0.3s ease;
 }
 
 /* ==========================================
-   2. HERO 섹션 (최종 보완본)
+   SECTION 1. HERO 비주얼 영역
    ========================================== */
 .hero-image {
     width: 100% !important;
-    height: 55vh;
-    min-height: 380px;
+    height: 50vh;
+    min-height: 360px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     color: #ffffff;
     position: relative;
+    margin: 0 !important;
 
-    /* background 설정을 분리하여 단일 레이어로 처리 */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+    /* 단일 통합 백그라운드로 안전하게 지정 */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
         url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80') !important;
     background-position: center !important;
     background-size: cover !important;
     background-repeat: no-repeat !important;
-
-    /* 혹시 모를 내부 요소가 왼쪽으로 쏠리거나 갈라지는 현상 방지 */
-    left: 0;
-    right: 0;
-}
-
-.hero-overlay {
-    padding: 20px;
-    max-width: 800px;
-    z-index: 10;
 }
 
 .hero-overlay h1 {
@@ -95,7 +92,7 @@
     font-weight: 800;
     margin-bottom: 20px;
     letter-spacing: -0.5px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .hero-overlay p {
@@ -103,11 +100,11 @@
     font-weight: 300;
     opacity: 0.95;
     word-break: keep-all;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 /* ==========================================
-   3. 공통 섹션 레이아웃
+   SECTION 2. 공통 컨텐츠 기본 본문 레이아웃
    ========================================== */
 .activity-section {
     max-width: 1100px;
@@ -133,7 +130,7 @@
 }
 
 /* ==========================================
-   4. 바다가 좋은 이유 (카드 그리드)
+   SECTION 3. 이로운 이유 (그리드 카드 디자인)
    ========================================== */
 .card-grid {
     display: grid;
@@ -170,7 +167,7 @@
     white-space: pre-line;
 }
 
-/* 사례 박스 */
+/* 내포 사례 안내형 박스 */
 .example-box {
     background-color: rgba(99, 159, 171, 0.1);
     border-left: 4px solid var(--secondary-color);
@@ -188,7 +185,7 @@
 }
 
 /* ==========================================
-   5. 위험 섹션 (경고 박스)
+   SECTION 4. 아픈 이유 (위험 경고 대형 바 카드)
    ========================================== */
 .danger-box {
     background: var(--card-bg);
@@ -212,7 +209,7 @@
 }
 
 /* ==========================================
-   6. 영향 섹션 (리스트 스타일)
+   SECTION 5. 인류에게 생기는 문제 (세련된 호버 리스트)
    ========================================== */
 .list {
     list-style: none;
@@ -233,12 +230,13 @@
 }
 
 .list li:hover {
-    transform: translateX(5px);
+    transform: translateX(6px);
     background-color: #ffffff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.04);
 }
 
 /* ==========================================
-   7. 해결 방안 섹션 (4칸 그리드)
+   SECTION 6. 인류의 해결 방안 (탑 보더 그리드)
    ========================================== */
 .solution-grid {
     display: grid;
@@ -266,7 +264,7 @@
 }
 
 /* ==========================================
-   8. 결론 섹션 (Ocean 딥블루 하이라이트)
+   SECTION 7. 결론 영역 (풀 와이드 글래스 오버 디자인)
    ========================================== */
 .activity-section.ocean {
     background: linear-gradient(135deg, #0a2540 0%, #1a365d 100%) !important;
@@ -274,7 +272,6 @@
     max-width: 100% !important;
     width: 100vw;
     margin-left: calc(-50vw + 50%);
-    /* 전체 화면으로 확장 */
     margin-right: calc(-50vw + 50%);
     padding: 100px 24px;
     text-align: center;
@@ -293,19 +290,20 @@
 }
 
 .activity-section.ocean h3 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 600;
     color: #9ae6b4;
-    background: rgba(255, 255, 255, 0.1);
+    /* 파스텔 그린 에메랄드 */
+    background: rgba(255, 255, 255, 0.08);
     display: inline-block;
     padding: 16px 32px;
     border-radius: 50px;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(8px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 /* ==========================================
-   9. 반응형 모바일 레이아웃 조정
+   MEDIA QUERY. 반응형 스마트폰 최적화
    ========================================== */
 @media (max-width: 768px) {
     .hero-overlay h1 {
